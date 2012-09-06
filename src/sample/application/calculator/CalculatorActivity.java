@@ -2,6 +2,8 @@ package sample.application.calculator;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -17,10 +19,35 @@ public class CalculatorActivity extends Activity {
 	
     public String num1 = new String();
     public String strTemp = "";
-	public Integer operator;
+	public Integer operator = 0;
 	public String strResult;
+	private static Map<Integer, FunctionLogic> funcMap;
+	
+	static{
+		CalculatorActivity.funcMap = new HashMap<Integer, FunctionLogic>();
+		CalculatorActivity.funcMap.put(R.id.keypadAC, new Ac());
+		CalculatorActivity.funcMap.put(R.id.keypadC, new C());
+		CalculatorActivity.funcMap.put(R.id.keypadBS, new Bs());
+		CalculatorActivity.funcMap.put(R.id.keypadCopy, new Copy());
+		
+	}
+	
 
-
+	//public static String final  hoge = "";
+/*	
+	public static String hog = this.strTemp;
+	
+	public static void onCre(){
+		hog = this.strTemp;
+	}
+	
+	static{
+		CalculatorActivity.hog  = "hoge";
+		CalculatorActivity.onCre();
+		CalculatorActivity.hog = this.strTemp;
+	    System.out.println(CalculatorActivity.class);
+	}
+*/
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,6 +163,24 @@ public class CalculatorActivity extends Activity {
 		}else{
 			return result.toString();
 		}
+		
+	}
+	
+	public void d(){
+		this.getSharedPreferences("hogr", 1000000000);
+	}
+	
+	public void functionKeyOnClick(View v){
+/*		
+		switch(v.getId()){
+		case R.id.keypadAC:
+		case R.id.keypadC:
+		case R.id.keypadBS:
+		case R.id.keypadCopy:
+		}
+	*/	
+		FunctionLogic logic = funcMap.get(v.getId());
+		logic.doFunction(this);
 		
 	}
 
