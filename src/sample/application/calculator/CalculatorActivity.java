@@ -88,7 +88,7 @@ public class CalculatorActivity extends Activity {
     	
     }
     
-    private void showNumber(String strNum){
+    public void showNumber(String strNum){
     	
     	DecimalFormat form = new DecimalFormat("#,##0");
     	String strDecimal = "";
@@ -171,14 +171,7 @@ public class CalculatorActivity extends Activity {
 	}
 	
 	public void functionKeyOnClick(View v){
-/*		
-		switch(v.getId()){
-		case R.id.keypadAC:
-		case R.id.keypadC:
-		case R.id.keypadBS:
-		case R.id.keypadCopy:
-		}
-	*/	
+
 		FunctionLogic logic = funcMap.get(v.getId());
 		logic.doFunction(this);
 		
